@@ -1,0 +1,37 @@
+[store]
+[store.primary]
+connection = "postgresql://${PGUSER}:${PGPASSWORD}@${PGHOST}:5432/graph-node-bsc"
+pool_size = 10
+[store.bsc_testnet]
+connection = "postgresql://${PGUSER}:${PGPASSWORD}@${PGHOST}:5432/graph-node-bsc-testnet"
+pool_size = 10
+
+[deployment]
+[[deployment.rule]]
+match = { network= "bsc" }
+indexers = [ "index_node_bsc" ]
+[[deployment.rule]]
+match = { network= "bsc_testnet" }
+indexers = [ "index_node_bsc" ]
+shard = "bsc_testnet"
+[[deployment.rule]]
+indexers = [ "default" ]
+
+[chains]
+ingestor = "default"
+[chains.bsc]
+shard = "primary"
+provider = [
+  { label = "bsc", url="https://neat-solitary-frost.bsc.quiknode.pro/cc76093f65e4a9ed26f18d503f3bc1fe7cf548e3", features = [
+    "archive",
+    "traces",
+  ]}
+]
+[chains.bsc_testnet]
+shard = "bsc_testnet"
+provider = [
+  { label = "bsctestnet", url="https://neat-solitary-frost.bsc.quiknode.pro/cc76093f65e4a9ed26f18d503f3bc1fe7cf548e3", features = [
+    "archive",
+    "traces",
+  ]}
+]
