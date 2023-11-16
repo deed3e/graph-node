@@ -1,36 +1,36 @@
 [store]
 [store.primary]
-connection = "postgresql://${PGUSER}:${PGPASSWORD}@${PGHOST}:5432/graph-node-bsc"
+connection = "postgresql://${PGUSER}:${PGPASSWORD}@${PGHOST}:5432/graph-node-linea"
 pool_size = 10
-[store.bsc_testnet]
-connection = "postgresql://${PGUSER}:${PGPASSWORD}@${PGHOST}:5432/graph-node-bsc-testnet"
+[store.linea_testnet]
+connection = "postgresql://${PGUSER}:${PGPASSWORD}@${PGHOST}:5432/graph-node-linea-testnet"
 pool_size = 10
 
 [deployment]
 [[deployment.rule]]
-match = { network= "bsc" }
-indexers = [ "index_node_bsc" ]
+match = { network= "linea" }
+indexers = [ "index_node_linea" ]
 [[deployment.rule]]
-match = { network= "bsc_testnet" }
-indexers = [ "index_node_bsc" ]
-shard = "bsc_testnet"
+match = { network= "linea_testnet" }
+indexers = [ "index_node_linea_testnet" ]
+shard = "linea_testnet"
 [[deployment.rule]]
 indexers = [ "default" ]
 
 [chains]
 ingestor = "default"
-[chains.bsc]
+[chains.linea]
 shard = "primary"
 provider = [
-  { label = "bsc", url="https://neat-solitary-frost.bsc.quiknode.pro/cc76093f65e4a9ed26f18d503f3bc1fe7cf548e3", features = [
+  { label = "linea", url="https://linea-mainnet.infura.io/v3/b35d224f006a413b80d648a9fdf60b62", features = [
     "archive",
     "traces",
   ]}
 ]
-[chains.bsc_testnet]
-shard = "bsc_testnet"
+[chains.linea_testnet]
+shard = "linea_testnet"
 provider = [
-  { label = "bsctestnet", url="https://neat-solitary-frost.bsc.quiknode.pro/cc76093f65e4a9ed26f18d503f3bc1fe7cf548e3", features = [
+  { label = "lineatestnet", url="https://linea-goerli.infura.io/v3/b35d224f006a413b80d648a9fdf60b62", features = [
     "archive",
     "traces",
   ]}
